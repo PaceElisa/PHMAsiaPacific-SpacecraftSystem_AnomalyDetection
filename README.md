@@ -1,4 +1,4 @@
-# PHM-Asia-Pacific 2023---Progetto-C1
+# PHM-Asia-Pacific 2023---Progetto-C1 di Manutenzione preventiva per la robotica e l'automazione intelligente
 
 I dati di telemetria che possono essere acquisiti in orbita sono ridotti a causa della limitazione nell' installazione di sensori e della capacità di downlink. Per ovviare a ciò la Japan Aerospace Exploration Agency (JAXA) ha sviluppato un simulatore numerico per prevedere la risposta dinamica di un sistema di propulsione di un veicolo spaziale con elevata precisione per generare un set di dati che copra le condizioni normali e tutti gli scenari di guasto previsti nelle apparecchiature reali.
 L'obiettivo del progetto è sviluppare un modulo di diagnosi in grado di classificare anomalie, bolle, guasti alle elettrovalvole e casi anomali sconosciuti partendo dai dati generati dal simulatore semplificato del sistema di propulsione sviluppato con la collaborazione di JAXA.
