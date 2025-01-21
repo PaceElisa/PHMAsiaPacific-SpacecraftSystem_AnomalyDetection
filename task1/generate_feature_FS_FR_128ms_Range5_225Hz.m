@@ -804,3 +804,4 @@ if nargout > 1
     outputTable = readall(outputEnsemble);
 end
 end
+>>>>>>> ffb689c24ce0c45f58d4fea442cfa15f58c163d9
