@@ -1,9 +1,6 @@
 test_perc = 20;
 
 % num windows fame policy 0.128s
-
-n_step = 1;
-num_split = 1;
 num_window = 10;
 
 features_table = FeatureTable1;
