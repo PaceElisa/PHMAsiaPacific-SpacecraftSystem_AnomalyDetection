@@ -6,30 +6,37 @@ run("..\testDataset.m")
 
 % Features extraction
 addpath('dataset\');
-import generate_features_task1.*
+%***import generate_features_task1.*
+import diagnosticFeatures25.*
 import aggregate_predictions_by_mode.*
 
 % Carica il modello addestrato
-load('bestModel.mat');
+%***load('bestModel.mat');
+load('trainedModel8015300125.mat');
 
 % Caricamento file delle risposte per confronto
 answers = '../answer.csv';
 answers = readtable(answers, 'VariableNamingRule', 'preserve');
 
-%Frame Policy di 0.128ms
-% Numero di finestre per campione(1200ms/0.128ms)
-windowsPerSample = 10;
+%Frame Policy di 128ms
+% Numero di finestre per campione(1200ms/128ms)
+%***windowsPerSample = 10;
+
+%Frame Policy di 80ms
+% Numero di finestre per campione(1200ms/80ms)
+windowsPerSample = 15;
+
 
 %% Addestramento
 
 % **** Generazione delle feature dei dati di test del task 1 ****
-[testFeatureTable1, x1] = generate_features_task1(testData);
-
+%[testFeatureTable1, x1] = generate_features_task1(testData);
+[testFeatureTable1, x1] = diagnosticFeatures25(testData);
 % Check the structure of trainedModel_task1
 %whos bestModel
 
 % Predizioni sulle feature del dataset di test
-predictedLabelsArray = bestModel.predictFcn(testFeatureTable1); % Salva le predizioni in un array
+predictedLabelsArray = trainedModel8015300125.predictFcn(testFeatureTable1); % Salva le predizioni in un array
 
 % Visualizza o salva i risultati
 %disp(predictedLabelsArray);  % Visualizza le predizioni
@@ -67,7 +74,7 @@ disp(['Data classified as abnormal (class 1): ' , num2str(count_abnormal)]);
 
 
 %% Sistema di voting con threshold (2)
-threshold = int32(windowsPerSample*7/10)+1;
+threshold = int32(windowsPerSample*2/3)+1;
 len = length(predictedLabelsArray);
 prediction = [];
 
