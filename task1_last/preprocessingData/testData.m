@@ -1,5 +1,5 @@
 % Test dataset path
-TestData = "C:\Users\Micol\Documents\MATLAB\PHM_Asia_Pacific_Progetto_C1\dataset\test\data\";
+TestData = "..\..\dataset\test\data\";
 
 % The various cases contained in the test dataset path are read and saved
 % all in a cell array (container), where each .csv file is saved in a
