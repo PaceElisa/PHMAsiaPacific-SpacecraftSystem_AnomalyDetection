@@ -34,7 +34,7 @@ numPredictedLabels = numel(predictedLabelsArray);
 disp(['Number of predicted labels: ', num2str(numPredictedLabels)]);
 
 % saves predictions on a csv file
-writetable(table(predictedLabelsArray), '../testing/predictions_test_set.csv');
+%writetable(table(predictedLabelsArray), '../testing/predictions_test_set.csv');
 
 % Voting system using moda (1)
 
@@ -46,7 +46,7 @@ finalPredictionsNumber = numel(predictedPerSample);  % Numero di predizioni
 disp(['Number of final predicted labels: ', num2str(finalPredictionsNumber)]);
 
 % Saves results on a csv file
-writetable(table(predictedPerSample), '../testing/predictions_per_sample.csv');
+writetable(table(predictedPerSample), '../testing/predictions_per_sample_task1_moda.csv');
 
 count_normal = length(predictedPerSample(predictedPerSample == 0));   
 count_abnormal = length(predictedPerSample(predictedPerSample == 1));
@@ -68,6 +68,9 @@ for i = 1:windowsPerSample:len-windowsPerSample+1
         prediction = [prediction, 0];
     end
 end
+
+% Saves results on a csv file
+writetable(table(prediction), '../testing/predictions_per_sample_task1_treshold.csv');
 
 count_normal = length(prediction(prediction == 0));   
 count_abnormal = length(prediction(prediction == 1));
@@ -97,6 +100,7 @@ saveas(gcf, [fig_name, '.png']);
 
 % Add id to predictions and transpose prediction1
 predictedPerSample = [answers.ID predictedPerSample'];
+
 
 % Performance evaluation for voting system (2)
 correct_answer_task1 = answers.task1';
