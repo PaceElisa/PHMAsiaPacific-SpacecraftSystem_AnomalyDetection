@@ -172,6 +172,7 @@ disp(['Samples classified as bubble contamination by binary classifier (using th
 predictionsTable.Predictions(testSet_KnownAnomalies.ID(predictedPerSample == 2)) = 2; % Bubble
 predictionsTable.Predictions(testSet_KnownAnomalies.ID(predictedPerSample == 1)) = 3; % Valve
 
+writetable(predictionsTable, 'predictions.csv');
 
 %% Performance Evaluation
 
