@@ -7,36 +7,38 @@ run("..\testDataset.m")
 % Features extraction
 addpath('dataset\');
 %***import generate_features_task1.*
-import diagnosticFeatures25.*
+import diagnosticFeatures128_10_5300_2_20.*
 import aggregate_predictions_by_mode.*
 
 % Carica il modello addestrato
 %***load('bestModel.mat');
-load('trainedModel8015300125.mat');
+%load('trainingOutput_BaggedTrees.mat');
+load('trainingOutput_Boosted.mat');
+
 
 % Caricamento file delle risposte per confronto
-answers = '../answer.csv';
+answers = '../dataset/answer.csv';
 answers = readtable(answers, 'VariableNamingRule', 'preserve');
 
 %Frame Policy di 128ms
 % Numero di finestre per campione(1200ms/128ms)
-%***windowsPerSample = 10;
+windowsPerSample = 10;
 
-%Frame Policy di 80ms
+%Frame Policy di 160ms
 % Numero di finestre per campione(1200ms/80ms)
-windowsPerSample = 15;
+%windowsPerSample = 8;
 
 
 %% Addestramento
 
 % **** Generazione delle feature dei dati di test del task 1 ****
 %[testFeatureTable1, x1] = generate_features_task1(testData);
-[testFeatureTable1, x1] = diagnosticFeatures25(testData);
+[testFeatureTable1, x1] = diagnosticFeatures128_10_5300_2_20(testData);
 % Check the structure of trainedModel_task1
 %whos bestModel
 
 % Predizioni sulle feature del dataset di test
-predictedLabelsArray = trainedModel8015300125.predictFcn(testFeatureTable1); % Salva le predizioni in un array
+predictedLabelsArray = trainingOutput_Boosted.predictFcn(testFeatureTable1); % Salva le predizioni in un array
 
 % Visualizza o salva i risultati
 %disp(predictedLabelsArray);  % Visualizza le predizioni

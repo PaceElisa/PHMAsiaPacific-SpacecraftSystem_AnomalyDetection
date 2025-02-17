@@ -1,5 +1,6 @@
 %% Caricamento Dati e Modelli
 import train_test_split.*
+
 %import diagnosticFeatures20.*
 run("..\trainigDataset.m")
 
@@ -8,13 +9,16 @@ run("..\trainigDataset.m")
 % codice sotto e fai lo split del dataset ottenuto
 %% Generazione delle feature Frame Policy = 0.128ms
 % num windows frame policy 0.128s
-%numWindow = 10;
-%num windows frame policy 0.080s
-numWindow = 15;
+numWindow = 10;
+%num windows frame policy 0.400s
+%numWindow = 3;
+%num windows frame policy 0.160s
+%numWindow = 8;
 
 % **** Generazione delle feature dei dati di test del task 1 ****
 %[testFeatureTable1, x1] = diagnosticFeatures(challengeDataset);
-[testFeatureTable1, x1] = diagnosticFeatures25(challengeDataset);
+[testFeatureTable1, x1] = diagnosticFeatures128_10_5300_2_20(challengeDataset);
+%% 
 
 % **** Split dei dati di training per la validazione del task 1 ****
 [trainingTB,testingTB]  = train_test_split(testFeatureTable1,numWindow);
