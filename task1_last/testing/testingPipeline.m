@@ -38,6 +38,7 @@ disp(['Number of predicted labels: ', num2str(numPredictedLabels)]);
 
 %% Voting system using moda (1)
 
+%{
 % Aggregates predictions for sample
 predictedPerSample = aggregate_predictions_by_mode(predictedLabelsArray, windowsPerSample)';
 
@@ -54,6 +55,8 @@ count_abnormal = length(predictedPerSample(predictedPerSample == 1));
 disp(['Data classified as normal (class 0): ', num2str(count_normal)]);
 disp(['Data classified as abnormal (class 1): ' , num2str(count_abnormal)]);
 
+%}
+
 %% Voting System using threshold (2)
 threshold = int32(windowsPerSample*7/10)+1;
 len = length(predictedLabelsArray);
@@ -69,8 +72,6 @@ for i = 1:windowsPerSample:len-windowsPerSample+1
     end
 end
 
-% Saves results on a csv file
-writetable(table(prediction), '../testing/predictions_per_sample_task1_treshold.csv');
 
 count_normal = length(prediction(prediction == 0));   
 count_abnormal = length(prediction(prediction == 1));
@@ -79,6 +80,8 @@ fprintf('Data classified as normal (class 0): %d \n', count_normal);
 fprintf('Data classified as abnormal (class 1): %d \n', count_abnormal);
 
 %% Performance evaluation for voting system (1)
+
+%{
 correct_answer_task1 = answers.task1';
 rightPredic1 = correct_answer_task1 == predictedPerSample;
 
@@ -100,6 +103,8 @@ saveas(gcf, [fig_name, '.png']);
 
 % Add id to predictions and transpose prediction1
 predictedPerSample = [answers.ID predictedPerSample'];
+
+%}
 
 %% Performance evaluation for voting system (2)
 
@@ -124,3 +129,6 @@ saveas(gcf, [fig_name, '.png']);
 
 % Add id to predictions and transpose prediction1
 prediction = [answers.ID prediction'];
+
+% Saves results on a csv file
+writetable(table(prediction), '../testing/predictions_task1.csv');
