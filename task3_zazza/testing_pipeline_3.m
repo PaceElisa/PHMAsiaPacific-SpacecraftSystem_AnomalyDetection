@@ -1,6 +1,7 @@
 % Loading of the test dataset composed of bubble contamination anomalies, obtained by filtering
 % the results obtained by task 2
-load("./preprocessingData/filteredTestSet.mat", "filteredTestSet");  
+load("./preprocessingData/filteredTestSet.mat", "filteredTestSet"); 
+disp( [newline '__Task3__']);
 disp(['Number of samples in the test set: ', num2str(height(filteredTestSet))]);
 
 % loading of the table with predictions
@@ -82,7 +83,7 @@ disp(['Model Accuracy: ', num2str(accuracy), '%']);
 % Confusion Matrix
 
 classLabels = {'Other', 'BP1', 'BP2', 'BP3', 'BP4', 'BP5', 'BP6', 'BP7'};
-C = confusionmat(trueLabels, predictedLabels)
+C = confusionmat(trueLabels, predictedLabels);
 figure;
 subplot(1,2,1);
 confusionchart(C, classLabels);
