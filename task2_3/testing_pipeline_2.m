@@ -1,5 +1,6 @@
 % Loading of the test dataset composed of anomalies, obtained by filtering the results obtained by task 1
-load("./preprocessingData/filteredTestSet.mat", "filteredTestSet");  
+load("./preprocessingData/filteredTestSet.mat", "filteredTestSet"); 
+disp( [newline '__Task2__']);
 disp(['Number of samples in the test set: ', num2str(height(filteredTestSet))]);
 
 % loading of the table with predictions
@@ -189,8 +190,8 @@ disp(['Model Accuracy: ', num2str(accuracy), '%']);
 
 % Confusion Matrix
 
-classLabels2 = {'Normal', 'Unknown', 'Bubble Anomaly', 'Valve'}
-C2 = confusionmat(trueLabels, predictedLabels)
+classLabels2 = {'Normal', 'Unknown', 'Bubble Anomaly', 'Valve'};
+C2 = confusionmat(trueLabels, predictedLabels);
 figure;
 subplot(1,2,1);
 confusionchart(C2, classLabels2);
