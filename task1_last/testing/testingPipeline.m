@@ -30,8 +30,9 @@ windowsPerSample = 10;
 predictedLabelsArray = optimizedModel1.predictFcn(testFeatureTable1); 
 
 % Number of predictions
-numPredictedLabels = numel(predictedLabelsArray); 
-disp(['Number of predicted labels: ', num2str(numPredictedLabels)]);
+numPredictedLabels = numel(predictedLabelsArray);
+disp( [newline '__Task1__']);
+disp(['Number of predicted labels: ', num2str(numPredictedLabels/windowsPerSample)]);
 
 % saves predictions on a csv file
 %writetable(table(predictedLabelsArray), '../testing/predictions_test_set.csv');
@@ -72,6 +73,8 @@ for i = 1:windowsPerSample:len-windowsPerSample+1
     end
 end
 
+% Saves results on a csv file
+writetable(table(prediction), '../testing/predictions_per_sample_task1_treshold.csv');
 
 count_normal = length(prediction(prediction == 0));   
 count_abnormal = length(prediction(prediction == 1));
@@ -129,6 +132,3 @@ saveas(gcf, [fig_name, '.png']);
 
 % Add id to predictions and transpose prediction1
 prediction = [answers.ID prediction'];
-
-% Saves results on a csv file
-writetable(table(prediction), '../testing/predictions_task1.csv');
