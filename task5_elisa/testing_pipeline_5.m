@@ -1,6 +1,7 @@
 % Loading of the test dataset composed of valve faults, obtained by filtering
 % the results obtained by task 2
 load("./preprocessingData/filteredTestSet5.mat", "filteredTestSet5");  
+disp( [newline '__Task5__']);
 disp(['Number of samples in the test set: ', num2str(height(filteredTestSet5))]);
 
 % loading of the table with predictions
@@ -127,6 +128,9 @@ MAE = mean(abs(trueLabelsAll - predictedLabelsAll));
 SSres = sum((trueLabelsAll - predictedLabelsAll).^2);
 SStot = sum((trueLabelsAll - mean(trueLabelsAll)).^2);
 R2 = 1 - (SSres / SStot);
+disp(['Model RMSE: ', num2str(RMSE,'%.4f'), '%']);
+disp(['Model MAE: ', num2str(MAE,'%.4f'), '%']);
+disp(['Model R^2: ', num2str(R2,'%.4f'), '%']);
 
 % Rendering Scatter plot for samples
 figure;
