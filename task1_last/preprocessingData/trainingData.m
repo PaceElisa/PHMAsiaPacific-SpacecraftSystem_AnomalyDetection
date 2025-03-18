@@ -1,6 +1,6 @@
 % Training Dataset paths
-LabelDataset = "C:\Users\Micol\Documents\MATLAB\PHM_Asia_Pacific_Progetto_C1\dataset\train\labels.xlsx";
-TrainingDataset = "C:\Users\Micol\Documents\MATLAB\PHM_Asia_Pacific_Progetto_C1\dataset\train\data\";
+LabelDataset = "..\..\dataset\train\labels.xlsx";
+TrainingDataset = "..\..\dataset\train\data\";
 
 % Loading the dataset with labels
 labelsTable = readtable(LabelDataset);

@@ -20,7 +20,7 @@ load('../hyperparameterTuning/optimizedModel1.mat');
 answers = '../testing/answer.csv';
 answers = readtable(answers, 'VariableNamingRule', 'preserve');
 
-% Frame Policy = 0.128ms -> number of windows for sample = 10 (1200ms/0.128ms)
+%% Frame Policy = 128ms -> number of windows for sample = 10 (1200ms/128ms)
 windowsPerSample = 10;
 
 % Features extraction from test data
@@ -30,14 +30,16 @@ windowsPerSample = 10;
 predictedLabelsArray = optimizedModel1.predictFcn(testFeatureTable1); 
 
 % Number of predictions
-numPredictedLabels = numel(predictedLabelsArray); 
-disp(['Number of predicted labels: ', num2str(numPredictedLabels)]);
+numPredictedLabels = numel(predictedLabelsArray);
+disp( [newline '__Task1__']);
+disp(['Number of predicted labels: ', num2str(numPredictedLabels/windowsPerSample)]);
 
 % saves predictions on a csv file
 %writetable(table(predictedLabelsArray), '../testing/predictions_test_set.csv');
 
-% Voting system using moda (1)
+%% Voting system using moda (1)
 
+%{
 % Aggregates predictions for sample
 predictedPerSample = aggregate_predictions_by_mode(predictedLabelsArray, windowsPerSample)';
 
@@ -54,7 +56,9 @@ count_abnormal = length(predictedPerSample(predictedPerSample == 1));
 disp(['Data classified as normal (class 0): ', num2str(count_normal)]);
 disp(['Data classified as abnormal (class 1): ' , num2str(count_abnormal)]);
 
-% Voting System using threshold (2)
+%}
+
+%% Voting System using threshold (2)
 threshold = int32(windowsPerSample*7/10)+1;
 len = length(predictedLabelsArray);
 prediction = [];
@@ -78,7 +82,9 @@ count_abnormal = length(prediction(prediction == 1));
 fprintf('Data classified as normal (class 0): %d \n', count_normal);
 fprintf('Data classified as abnormal (class 1): %d \n', count_abnormal);
 
-% Performance evaluation for voting system (1)
+%% Performance evaluation for voting system (1)
+
+%{
 correct_answer_task1 = answers.task1';
 rightPredic1 = correct_answer_task1 == predictedPerSample;
 
@@ -101,8 +107,10 @@ saveas(gcf, [fig_name, '.png']);
 % Add id to predictions and transpose prediction1
 predictedPerSample = [answers.ID predictedPerSample'];
 
+%}
 
-% Performance evaluation for voting system (2)
+%% Performance evaluation for voting system (2)
+
 correct_answer_task1 = answers.task1';
 rightPredic2 = correct_answer_task1 == prediction;
 

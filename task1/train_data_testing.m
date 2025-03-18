@@ -1,48 +1,30 @@
+%% Caricamento Dati e Modelli
+import train_test_split.*
+
+%import diagnosticFeatures20.*
+run("..\trainigDataset.m")
+
+%% Apri il diagnostic feature designer con il dataset challenge dataset ottenuto poi salva lo script come 
+% diagnosticFeaturen dove n sono il numero di feature estratte poi esegui
+% codice sotto e fai lo split del dataset ottenuto
+%% Generazione delle feature Frame Policy = 0.128ms
 % num windows frame policy 0.128s
 numWindow = 10;
+%num windows frame policy 0.400s
+%numWindow = 3;
+%num windows frame policy 0.160s
+%numWindow = 8;
 
-%maggioranza = int32(numWindow/2)+1;
-dueterzi = int32(numWindow*2/3)+1;
+% **** Generazione delle feature dei dati di test del task 1 ****
+%[testFeatureTable1, x1] = diagnosticFeatures(challengeDataset);
+[testFeatureTable1, x1] = diagnosticFeatures128_10_5300_2_20(challengeDataset);
+%% 
 
-trainingTB = training_table;
-testingTB = test_table;
-% trainTable = FeatureTableTrain;
+% **** Split dei dati di training per la validazione del task 1 ****
+[trainingTB,testingTB]  = train_test_split(testFeatureTable1,numWindow);
+%[trainingTB,testingTB]  = train_test_split(FeatureTable1,numWindow);
 
+% Apri il Classification Learner e addestra il modello con i dati di
+% trainingTB, mettilo al posto di trainedModel e poi testa con quelli di
+% testingTB aprendo lo script pipeline_task1
 
-% [yfit,scores]=trainedModel1.predictFcn(testTable);
-yfit=trainedModel.predictFcn(testingTB);
-len = length(yfit);
-
-labels = testingTB.Task1;
-label_container = [];
-for i = 1:numWindow:len-numWindow+1
-    label_container = [label_container,labels(i)];
-end
-
-prediction = [];
-
-if ismember('Task1', trainingTB.Properties.VariableNames)
-    for i = 1:numWindow:len-numWindow+1
-        countOfOnes = sum(yfit(i:i+numWindow-1) == 1);
-        countOfZeros = numWindow-countOfOnes;
-        if countOfOnes>=dueterzi
-            prediction = [prediction, 1];
-        else
-            prediction = [prediction, 0];
-        end
-    end
-    
-    correctPredictions = label_container == prediction;%array riga logico che contiene 
-    %wrongPredictions = sum(prediction == 1)
-    
-    % Calculate accuracy
-    accuracy = sum(correctPredictions) / numel(label_container);
-    
-    % Display accuracy
-    disp(['Accuracy: ', num2str(accuracy * 100), '%']);
-    
-    classLabels = {'Normal', 'Abnormal'};
-    
-    C = confusionmat(label_container,prediction);
-    confusionchart(C, classLabels)
-end
