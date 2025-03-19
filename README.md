@@ -7,7 +7,7 @@ Japan Aerospace Exploration Agency (JAXA) aims to enhance Prognostics and Health
 ## 🎯 Competition Objectives
 
 The goal of this competition is to improve PHM technology for next-generation spacecraft by diagnosing different system states, including:
-- Normal operation
+- Normal cases
 - Bubble anomalies
 - Solenoid valve faults
 - Unknown anomalies
@@ -74,36 +74,33 @@ This project was developed using MATLAB, utilizing the following tools:
 ### 📂 Folder Organization
 
 ```plaintext
-├── Task_1  # Normal/Abnormal classification
-│   ├── Preprocessing
-│   ├── Feature_Extraction
-│   ├── Training
-│   ├── Tuning
-│   ├── Test_Pipeline
+├── dataset
+├── task1  # Normal/Abnormal classification
+│   ├── featuresExtraction
+│   ├── hyperparameterTuning
+│   ├── preprocessingData
+│   ├── testing
+│   ├── training
 ├── Task_2  # Anomaly type classification
-│   ├── Preprocessing
-│   ├── Feature_Extraction
-│   ├── Training
-│   ├── Tuning
-│   ├── Test_Pipeline
+│   ├── OC_SVM
+│   ├── binaryClassification
+│   ├── preprocessingData
+│   ├── testing
 ├── Task_3  # Bubble anomaly location detection
-│   ├── Preprocessing
-│   ├── Feature_Extraction
-│   ├── Training
-│   ├── Tuning
-│   ├── Test_Pipeline
+│   ├── featuresExtraction
+│   ├── preprocessingData
+│   ├── testing
+│   ├── training
 ├── Task_4  # Solenoid valve fault identification
-│   ├── Preprocessing
-│   ├── Feature_Extraction
-│   ├── Training
-│   ├── Tuning
-│   ├── Test_Pipeline
+│   ├── featuresExtraction
+│   ├── preprocessingData
+│   ├── testing
+│   ├── training
 ├── Task_5  # Valve opening ratio regression
-│   ├── Preprocessing
-│   ├── Feature_Extraction
-│   ├── Training
-│   ├── Tuning
-│   ├── Test_Pipeline
+│   ├── featuresExtraction
+│   ├── preprocessingData
+│   ├── testing
+│   ├── training
 ├── Pipeline_Finale.m  # Master script to run all tasks sequentially
 ```
 
@@ -120,15 +117,11 @@ The final execution script, `Pipeline_Finale.m`, integrates all tasks into a cas
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-repo/PHM23-Spacecraft-Anomaly-Detection.git
+   git clone https://github.com/PaceElisa/PHM_Asia_Pacific_Progetto_C1.git
    ```
 2. Open MATLAB and navigate to the project directory.
 3. Run `Pipeline_Finale.m` to execute the full pipeline.
 4. Alternatively, execute individual test pipelines in each task folder.
-
-## Contributions
-
-Contributions and improvements are welcome! Feel free to submit pull requests or open issues for discussions.
 
 ## License
 
